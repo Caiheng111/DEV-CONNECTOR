@@ -4,7 +4,7 @@ const router = express.Router();
 const jwt=require('jsonwebtoken');
 
 const {check, validationResult}=require('express-validator/check');
-const User=require('../../modules/User');
+const User=require('../../models/User');
 
 const bcrypt=require('bcryptjs');
 const gravatar=require('gravatar');
@@ -14,7 +14,6 @@ const config=require('config');
 // @route get api/user
 router.post('/',
 [
-
   check('name','Please input your name')
   .not()
   .isEmpty(),
