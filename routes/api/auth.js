@@ -1,14 +1,16 @@
-
-const express=require('express');
+const express = require('express');
 const router = express.Router();
-const auth=require('../../middleware/auth');
-const {check, validationResult}=require('express-validator/check');
-const User=require('../../models/User');
-const bcrypt=require('bcryptjs');
-const jwt=require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const auth = require('../../middleware/auth');
+const jwt = require('jsonwebtoken');
+const config = require('config');
+const { check, validationResult } = require('express-validator/check');
 
-const config=require('config'); 
-//@route get api/auth
+const User = require('../../models/User');
+
+// @route    GET api/auth
+// @desc     Test route
+// @access   Public
 router.get('/', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
@@ -19,8 +21,6 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-
-// Authenticate user & get token
 // @route    POST api/auth
 // @desc     Authenticate user & get token
 // @access   Public
@@ -36,7 +36,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-  const { email, password } = req.body;
+    const { email, password } = req.body;
 
     try {
       let user = await User.findOne({ email });
@@ -47,7 +47,7 @@ router.post(
           .json({ errors: [{ msg: 'Invalid Credentials' }] });
       }
 
-  const isMatch = await bcrypt.compare(password, user.password);
+      const isMatch = await bcrypt.compare(password, user.password);
 
       if (!isMatch) {
         return res
@@ -55,7 +55,7 @@ router.post(
           .json({ errors: [{ msg: 'Invalid Credentials' }] });
       }
 
-  const payload = {
+      const payload = {
         user: {
           id: user.id
         }
