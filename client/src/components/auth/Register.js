@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom'
 // import axios from 'axios'
 import {connect} from 'react-redux'
 import {setAlert} from '../../actions/alert'
+import PropTypes from 'prop-types'
+
 
 
  const Register=(props)=> {
@@ -22,7 +24,7 @@ import {setAlert} from '../../actions/alert'
     const onSubmit = async e => {
       e.preventDefault();
       if (password !== password2) {
-        props.setAlert('password not match','danger')
+        props.setAlert('password not match','danger',3000)
         console.log('Passwords do not match', 'danger');
       
       } else {
@@ -34,11 +36,9 @@ import {setAlert} from '../../actions/alert'
         //       'content-type':"application/json"
         //     } 
         //   }
-
         //   const body=JSON.stringify(newUser)
         //   const res= await axios.post('/api/users', body, config)
         //   console.log(res.data);
-          
         // } catch(err){
         //   console.error(err.response.data);
           
@@ -104,5 +104,10 @@ import {setAlert} from '../../actions/alert'
   </Fragment>
   )
 }
+
+Register.protoTypes = {
+  setAlert :PropTypes.func.isRequired,
+}
+
 
 export default connect(null, {setAlert})(Register)
