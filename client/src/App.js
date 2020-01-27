@@ -16,7 +16,6 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-
 const App=() =>{
 
 //only run once
@@ -31,7 +30,6 @@ const App=() =>{
           <Navbar/>
          
           <Route exact path="/" component={Landing}/>
-        
           <section className="container">
           <Alert/>
             <Switch>
@@ -39,7 +37,6 @@ const App=() =>{
               <Route exact path="/login" component={Login}/>
             </Switch>
           </section>
-        
         </Fragment>
       </Router>
     </Provider>

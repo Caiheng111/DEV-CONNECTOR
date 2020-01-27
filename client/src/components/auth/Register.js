@@ -1,5 +1,5 @@
 import React, {Fragment,useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 // import axios from 'axios'
 import {connect} from 'react-redux'
 import {setAlert} from '../../actions/alert'
@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 
 
 
- const Register=(props)=> {
+ const Register=({setAlert, register, isAuthenticated})=> {
 
     const [formData, setFormData] = useState({
       name: '',
@@ -25,15 +25,20 @@ import PropTypes from 'prop-types'
     const onSubmit = async e => {
       e.preventDefault();
       if (password !== password2) {
-        props.setAlert('password not match','danger',3000)
+        setAlert('password not match','danger',3000)
         console.log('Passwords do not match', 'danger');
       
       } else {
         console.log('SUCCESS');
-        props.register({name, email,password})
+        register({name, email,password})
         
       }
     };
+
+
+    if (isAuthenticated) {
+      return <Redirect to='/dashboard' />;
+    }
 
 
 
@@ -96,7 +101,11 @@ import PropTypes from 'prop-types'
 Register.protoTypes = {
   setAlert :PropTypes.func.isRequired,
   register :PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
 }
 
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
 
-export default connect(null, {setAlert, register})(Register)
+export default connect(mapStateToProps, {setAlert, register})(Register)

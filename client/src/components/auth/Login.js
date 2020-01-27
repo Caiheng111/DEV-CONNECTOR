@@ -1,41 +1,34 @@
 import React, {Fragment,useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link,Redirect} from 'react-router-dom'
 import axios from 'axios'
+import {connect} from 'react-redux'
+import {login} from '../../actions/auth'
+import PropTypes from 'prop-types'
 
 
- const Login=()=> {
+
+ const Login=({login, isAuthenticated})=> {
 
     const [formData, setFormData] = useState({
       email: '',
       password: '',
     });
-  
+
     const {email, password} = formData;
-  
+
     const onChange = e =>
       setFormData({ ...formData, [e.target.name]: e.target.value });
-  
-    const onSubmit = async e => {
-    
-        console.log('SUCCESS');
-        // const newUser={name, email, password}
-        // try{
-        //   const config = {
-        //     headers:{
-        //       'content-type':"application/json"
-        //     } 
-        //   }
 
-        //   const body=JSON.stringify(newUser)
-        //   const res= await axios.post('/api/users', body, config)
-        //   console.log(res.data);
-          
-        // } catch(err){
-        //   console.error(err.response.data);
-          
-        // }
-        
+    const onSubmit = async e => {
+        console.log('SUCCESS'); 
+        login(email,password)
       }
+
+
+
+    if (isAuthenticated) {
+      return <Redirect to='/dashboard' />;
+    }
 
 
   return (
@@ -69,7 +62,7 @@ import axios from 'axios'
         />
       </div>
      
-      <input type='submit' className='btn btn-primary' value='Register' />
+      <input type='submit' className='btn btn-primary' value='Sign In' />
     </form>
     <p className='my-1'>
       Don't have an account? <Link to='/register'>Sign Up</Link>
@@ -78,4 +71,13 @@ import axios from 'axios'
   )
 }
 
-export default Login
+Login.protoTypes = {
+  isAuthenticated: PropTypes.bool,
+  login :PropTypes.func.isRequired
+}
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, login)(Login)
