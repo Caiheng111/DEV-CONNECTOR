@@ -1,4 +1,5 @@
 import React, {useEffect, Fragment} from 'react'
+import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {getCurrentProfile} from '../../actions/profile'
@@ -11,13 +12,19 @@ const Dashboard = ({getCurrentProfile, auth:{user}, profile :{ profile, loading}
   },[])
 
   return loading && profile === null ? 
-    <Spinner /> : <Fragment>
+    <Spinner /> : 
+    <Fragment>
       <h1 className='large text-primary'>Dashboard</h1>
       <p className='lead'>
         <i className='fas fa-user'/> Welcome {user && user.name}
       </p>
+
+      {profile  !== null ?
+      ( <Fragment>You have not set up profile yet, please add some infors 
+        <Link to="/create-profile" className="btn btn-primary my-1">Create Profile</Link>
+      </Fragment>) :
+      (<Fragment>has not</Fragment>)}
     </Fragment>;
-  
 }
 
 Dashboard.propTypes = {
