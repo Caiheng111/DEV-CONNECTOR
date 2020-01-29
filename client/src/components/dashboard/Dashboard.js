@@ -9,7 +9,7 @@ const Dashboard = ({getCurrentProfile, auth:{user}, profile :{ profile, loading}
 
   useEffect(()=>{
     getCurrentProfile()
-  },[])
+  },[getCurrentProfile])
 
   return loading && profile === null ? 
     <Spinner /> : 
@@ -21,10 +21,12 @@ const Dashboard = ({getCurrentProfile, auth:{user}, profile :{ profile, loading}
 
       {profile  !== null ?
       ( <Fragment>
-        You have not set up profile yet, please add some infors  <br/>
-        <Link to="/create-profile" className="btn btn-primary my-1">Create Profile</Link>
+          has  <br/>
+        
       </Fragment>) :
-      (<Fragment>has not</Fragment>)}
+      (<Fragment>has not <br/>
+      <Link to="/create-profile" className="btn btn-primary my-1">Create Profile</Link>
+      </Fragment>)}
     </Fragment>;
 }
 
