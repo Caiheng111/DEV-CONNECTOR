@@ -110,9 +110,6 @@ router.post(
 
 
 
-
-
-
 // @route    GET api/profile
 // @desc     Get all profiles
 // @access   Public
@@ -166,6 +163,8 @@ router.delete('/', auth, async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+
 
 // ADD EXPERIENCE
 // @route    PUT api/profile/experience
