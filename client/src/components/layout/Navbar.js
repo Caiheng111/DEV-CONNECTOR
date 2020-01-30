@@ -49,7 +49,6 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           <i className='fas fa-code' /> DevConnector
         </Link>
       </h1>
-      {/* means ifnot loading do the left parts codes */}
       {!loading && (
         <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
       )}

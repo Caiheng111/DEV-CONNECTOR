@@ -32,7 +32,6 @@ export const loadUser = () => async dispatch => {
   }
 };
 
-
 // Register User
 export const register = ({ name, email, password }) => async dispatch => {
   const config = {
@@ -63,9 +62,7 @@ export const register = ({ name, email, password }) => async dispatch => {
       type: REGISTER_FAIL
     });
   }
-
 };
-
 
 // Login User
 export const login = (email, password) => async dispatch => {
@@ -101,7 +98,6 @@ export const login = (email, password) => async dispatch => {
 
 // Logout / Clear Profile
 export const logout = () => dispatch => {
-  // dispatch({ type: CLEAR_PROFILE });
-  dispatch({ type: CLEAR_PROFILE })
-  dispatch({ type: LOGOUT })
-}
+  dispatch({ type: CLEAR_PROFILE });
+  dispatch({ type: LOGOUT });
+};
