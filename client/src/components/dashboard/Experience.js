@@ -18,6 +18,10 @@ const Experience = ({ experience, deleteExperience }) => {
           <Moment format="YYYY/MM/DD">{moment.utc(exp.to)}</Moment>
         )}
       </td>
+
+      <td>
+    
+      </td>
       <td>
         <button
           onClick={() => deleteExperience(exp._id)}
@@ -28,6 +32,9 @@ const Experience = ({ experience, deleteExperience }) => {
       </td>
     </tr>
   ));
+
+
+  
 
   return (
     <Fragment>
@@ -44,6 +51,8 @@ const Experience = ({ experience, deleteExperience }) => {
         <tbody>{experiences}</tbody>
       </table>
     </Fragment>
+
+    
   );
 };
 
