@@ -1,29 +1,34 @@
 {
-  "name": "dev-connector",
+  "name": "devconnector",
   "version": "1.0.0",
-  "description": "social network for developers",
+  "description": "Social network for developers",
   "main": "server.js",
   "scripts": {
     "start": "node server",
     "server": "nodemon server",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM-CONFIG-PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
-  "keywords": [],
-  "author": "heng cai",
-  "license": "ISC",
+  "author": "heng",
+  "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
-    "concurrently": "^5.0.2",
-    "config": "^3.2.4",
+    "client": "file:client",
+    "config": "^3.2.5",
     "express": "^4.17.1",
-    "express-validator": "^6.3.0",
+    "express-validator": "^6.3.1",
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.8.1",
-    "nodemon": "^2.0.2",
+    "mongoose": "^5.8.10",
     "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.1.0",
+    "nodemon": "^2.0.2"
+  },
+  "engines": {
+    "node": "8.1.1",
+    "npm": "5.0.3"
   }
 }
